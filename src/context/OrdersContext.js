@@ -1,11 +1,10 @@
 import { createContext, useEffect, useState } from 'react';
 import AsyncStorage from '@react-native-async-storage/async-storage';
-import { ORDERS } from '../data/userOrders';
 
 export const OrdersContext = createContext();
 
 export function OrdersProvider({ children }) {
-  const [orders, setOrders] = useState(ORDERS);
+  const [orders, setOrders] = useState([]);
 
   useEffect(() => {
     loadOrders();
@@ -19,12 +18,11 @@ export function OrdersProvider({ children }) {
         const parsedOrders = JSON.parse(storedOrders);
         setOrders(parsedOrders);
       } else {
-        setOrders(ORDERS);
-        await AsyncStorage.setItem('orders', JSON.stringify(ORDERS));
+        setOrders([]);
       }
     } catch (error) {
       console.log('Erro ao carregar pedidos:', error);
-      setOrders(ORDERS);
+      setOrders([]);
     }
   }
 

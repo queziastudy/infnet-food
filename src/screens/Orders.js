@@ -46,7 +46,7 @@ export default function Orders() {
               {item.items.map((product) => (
                 <View key={product.id} style={styles.item_row}>
                   <Text
-                    style={(styles.item_left, { color: theme.text_darkgray })}>
+                    style={[styles.item_left, { color: theme.text_darkgray }]}>
                     {product.quantidade}x {product.name}
                   </Text>
 
